@@ -1,0 +1,7 @@
+packages:
+  darwin:
+    brews:
+      - 'git'
+      - 'neovim@0.11.3'
+      - 'ripgrep@14.1.1'
+      - 'zoxide@0.9.8'

@@ -54,4 +54,19 @@ return {
 	"hrsh7th/nvim-cmp",
 	"L3MON4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
+	{
+		"mason-org/mason.nvim",
+		opts = {}
+	},
+	{
+	    "mason-org/mason-lspconfig.nvim",
+	    opts = {
+		ensure_installed = { "lua_ls", "gopls" },
+		automatic_enable = false,
+	    },
+	    dependencies = {
+		"mason-org/mason.nvim",
+		"neovim/nvim-lspconfig",
+	    },
+	},
 }

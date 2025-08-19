@@ -42,7 +42,7 @@ end
 
 local function active_lsp()
   local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-  local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
 
   for _, client in ipairs(clients) do
     if match_file_type(buf_ft)(client) then
@@ -141,7 +141,7 @@ local config = {
       }),
 
       component(function()
-        return string.sub(os.date(), 12, 16)
+        return os.date("%I:%m %p")
       end, {
         color = function() return { fg = colors.blue } end,
       }),

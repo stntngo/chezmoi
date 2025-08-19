@@ -46,3 +46,20 @@ lsp.lua_ls.setup({
 		},
 	},
 })
+
+lsp.gopls.setup({
+	name = "gopls",
+	cmd = { "gopls", "-remote=auto", "-rpc.trace", "-v" },
+	init_options = {
+		gofumpt = true,
+		staticcheck = true,
+		hints = {
+			parameterNames = true,
+			functionTypeParamets = true,
+			assignVariableTypes = true,
+		},
+	},
+	whitelist = { "go" },
+	capabilities = caps,
+	on_attach = on_attach,
+})
