@@ -61,7 +61,7 @@ return {
 	{
 	    "mason-org/mason-lspconfig.nvim",
 	    opts = {
-		ensure_installed = { "lua_ls", "gopls" },
+		ensure_installed = { "lua_ls", "gopls", "rust_analyzer" },
 		automatic_enable = false,
 	    },
 	    dependencies = {

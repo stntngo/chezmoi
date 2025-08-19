@@ -19,16 +19,9 @@ local on_attach = function(_, bufnr)
 	end, opts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
-
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = vim.api.nvim_create_augroup("LSP-Format-#" .. bufnr, { clear = true }),
-		buffer = bufnr,
-		callback = vim.lsp.buf.format,
-	})
 end
 
 local caps = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 local lsp = require("lspconfig")
 
 lsp.lua_ls.setup({
@@ -60,6 +53,26 @@ lsp.gopls.setup({
 		},
 	},
 	whitelist = { "go" },
+	capabilities = caps,
+	on_attach = on_attach,
+})
+
+lsp.rust_analyzer.setup({
+	name = "rust_analyzer",
+	settings = {
+		rust_analyzer = {
+			assist = {
+				importGranularity = "module",
+				importPrefix = "self",
+				formatOnSave = true,
+			},
+			cargo = {
+				loadOutDirsFromCheck = true,
+			},
+			procMacro = { enable = true },
+		},
+	},
+	whitelist = { "rust" },
 	capabilities = caps,
 	on_attach = on_attach,
 })
