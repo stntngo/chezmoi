@@ -1,3 +1,12 @@
+local keys = function(tbl)
+	local keyset = {}
+	for key, _ in pairs(tbl) do
+		table.insert(keyset, key)
+	end
+
+	return keyset
+end
+
 return {
 	"EdenEast/nightfox.nvim",
 	{
@@ -61,7 +70,7 @@ return {
 	{
 	    "mason-org/mason-lspconfig.nvim",
 	    opts = {
-		ensure_installed = { "lua_ls", "gopls", "rust_analyzer" },
+		ensure_installed = keys(require("config.lsp_servers")),
 		automatic_enable = false,
 	    },
 	    dependencies = {

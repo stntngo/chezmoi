@@ -24,55 +24,6 @@ end
 local caps = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lsp = require("lspconfig")
 
-lsp.lua_ls.setup({
-	capabilities = caps,
-	on_attach = on_attach,
-	settings = {
-		Lua = {
-			diagnostics = { globals = { "vim", "hs" } },
-			workspace = {
-				library = {
-					vim.fn.expand("$VIMRUNTIME/lua"),
-					vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-				},
-			},
-		},
-	},
-})
-
-lsp.gopls.setup({
-	name = "gopls",
-	cmd = { "gopls", "-remote=auto", "-rpc.trace", "-v" },
-	init_options = {
-		gofumpt = true,
-		staticcheck = true,
-		hints = {
-			parameterNames = true,
-			functionTypeParamets = true,
-			assignVariableTypes = true,
-		},
-	},
-	whitelist = { "go" },
-	capabilities = caps,
-	on_attach = on_attach,
-})
-
-lsp.rust_analyzer.setup({
-	name = "rust_analyzer",
-	settings = {
-		rust_analyzer = {
-			assist = {
-				importGranularity = "module",
-				importPrefix = "self",
-				formatOnSave = true,
-			},
-			cargo = {
-				loadOutDirsFromCheck = true,
-			},
-			procMacro = { enable = true },
-		},
-	},
-	whitelist = { "rust" },
-	capabilities = caps,
-	on_attach = on_attach,
-})
+for server, config in ipairs(require("config.lsp_servers")) do
+	lsp[server].setup(config(caps, on_attach))
+end
