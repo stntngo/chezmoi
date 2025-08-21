@@ -68,14 +68,49 @@ return {
 		opts = {}
 	},
 	{
-	    "mason-org/mason-lspconfig.nvim",
-	    opts = {
-		ensure_installed = keys(require("config.lsp_servers")),
-		automatic_enable = false,
-	    },
-	    dependencies = {
-		"mason-org/mason.nvim",
-		"neovim/nvim-lspconfig",
-	    },
+		"mason-org/mason-lspconfig.nvim",
+		opts = {
+			ensure_installed = keys(require("config.lsp_servers")),
+			automatic_enable = false,
+		},
+		dependencies = {
+			"mason-org/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
 	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		main = "nvim-treesitter.configs",
+		branch = 'master',
+		lazy = false,
+		build = ":TSUpdate",
+		opts = {
+			ensure_installed = { "python", "go", "rust", "lua" },
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+			playground = {
+				enable = true,
+				disable = {},
+				updatetime = 25,
+				persist_queries = false,
+				keybindings = {
+					toggle_query_editor = "o",
+					toggle_hl_groups = "i",
+					toggle_injected_languages ="t",
+					toggle_anonymous_nodes = "a",
+					toggle_language_display = "I",
+					focus_language = "f",
+					unfocus_language = "F",
+					update = "R",
+					goto_node = "<cr>",
+					show_help = "?",
+
+				},
+
+			}
+		},
+	},
+	"nvim-treesitter/playground",
 }

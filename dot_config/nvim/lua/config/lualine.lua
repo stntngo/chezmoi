@@ -141,7 +141,7 @@ local config = {
       }),
 
       component(function()
-        return os.date("%I:%m %p")
+        return os.date("%I:%M %p")
       end, {
         color = function() return { fg = colors.blue } end,
       }),
