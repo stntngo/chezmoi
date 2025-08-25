@@ -24,6 +24,6 @@ end
 local caps = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lsp = require("lspconfig")
 
-for server, config in ipairs(require("config.lsp_servers")) do
+for server, config in pairs(require("config.lsp_servers")) do
 	lsp[server].setup(config(caps, on_attach))
 end
